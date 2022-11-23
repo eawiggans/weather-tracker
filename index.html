@@ -17,23 +17,23 @@
 
 <body class="flex-column min-100-vh">
 
-<header class="hero text-bg-info p-3">
-    <h1>Weather Dashboard</h1>
+<header class="hero text-bg-primary">
+    <h1 class="px-5 py-3">Weather Dashboard</h1>
 </header>
 
 
 <main class="row">
     
-    <div class="col-3 col-md-4 col-sm-12">
-        <div class="card" id="search">
-            <h3 class="card-header text-bg-secondary">Search by City</h3>
+    <div class="col-2 col-md-3 col-sm-12">
+        <div class="card bg-info" id="search">
+            <h3 class="card-header text-bg-secondary px-3">Search by City</h3>
             <form id="search-form" class="card-body">
                 <input id="search-input" name="cityhere" type="text" class="form-input">
                 <button type="submit" id="search-btn" class="btn btn-primary">Search</button>
             </form>
         </div>
-        <div class="card" id="past-searches">
-            <h3 class="card-header text-bg-secondary">Your Cities</h3>
+        <div class="card bg-info" id="past-searches">
+            <h3 class="card-header text-bg-secondary px-3">Your Cities</h3>
             <div id="city-buttons" class="card-body row">
 
             </div>
@@ -51,7 +51,7 @@
         <div  id="five-day" class="row">
             <h3>Five-day Forecast</h3>
 
-            <div id="five-day-container" class="row forecast-card">
+            <div id="five-day-container" class="row forecast-card  justify-content-around">
 
             </div>
 

@@ -1,15 +1,13 @@
-// GIVEN a weather dashboard with form inputs
-// WHEN I search for a city
-// THEN I am presented with current and future conditions for that city and that city is added to the search history
 var fetchButton = document.getElementById("search-btn");
 var inputValue = document.getElementById("search-input");
 
+//search button
 fetchButton.addEventListener("click", function(event) {
     event.preventDefault();
     getApi(inputValue.value);
 });
 
-
+//fetching longitude and latitude
 function getApi(city) {
     var getLatLong = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=e893f77c4ef5c1780913960b49428199";
     console.log(getLatLong);
@@ -27,6 +25,8 @@ function getApi(city) {
 
 
 }
+
+//fetching weather data based on lon/lat from last fetch
 function getCityData(data) { 
     var requestUrl = "https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat=" + data.lat + "&lon=" + data.lon + "&appid=e893f77c4ef5c1780913960b49428199";
 
@@ -44,6 +44,7 @@ function getCityData(data) {
         })
 }
 
+//display current weather
 function oneDayDisplay(cityData, cityName) {
     var currentCard = document.getElementById("current-weather");
     var card = document.createElement("div");
@@ -53,9 +54,9 @@ function oneDayDisplay(cityData, cityName) {
     while (currentCard.firstChild) {
         currentCard.removeChild(currentCard.firstChild);
       }
-    card.classList.add("card");
-    cardName.classList.add("card-header");
-    cardBody.classList.add("card-body");
+    card.classList.add("card", "bg-info");
+    cardName.classList.add("card-header", "text-bg-primary");
+    cardBody.classList.add("card-body", "bg-info");
     cardName.textContent = cityName;
     cardBody.innerHTML = `temp: ${cityData.main.temp} humidity: ${cityData.main.humidity} wind speed: ${cityData.wind.speed}`;
     iconImg.setAttribute("src", `https://openweathermap.org/img/wn/${cityData.weather[0].icon}.png`);
@@ -67,6 +68,7 @@ function oneDayDisplay(cityData, cityName) {
     localStorage.setItem(cityName, JSON.stringify(cityName));
 }
 
+//display five day forecast
 function fiveDayDisplay(weatherData) {
     var fiveDays = document.getElementById("five-day-container");
     while (fiveDays.firstChild) {
@@ -76,12 +78,12 @@ function fiveDayDisplay(weatherData) {
         var element = weatherData.list[i];
         if (element.dt_txt.includes("06:00:00")) {
             let card = document.createElement("div");
-            card.classList.add("card", "col-2");
+            card.classList.add("card", "bg-info", "col-2");
             let cardName = document.createElement("div");
-            cardName.classList.add("card-header");
+            cardName.classList.add("card-header", "text-bg-primary");
             let cardBody = document.createElement("div");
-            cardBody.classList.add("card-body");
-            cardName.textContent = element.dt_txt;
+            cardBody.classList.add("card-body", "bg-info");
+            cardName.textContent = "Date: " + element.dt_txt;
             cardBody.innerHTML = `temp: ${element.main.temp} humidity: ${element.main.humidity} wind speed: ${element.wind.speed}`;
             let cardImg = document.createElement("img");
             cardImg.setAttribute("src", `https://openweathermap.org/img/wn/${element.weather[0].icon}.png`);
@@ -96,15 +98,14 @@ function fiveDayDisplay(weatherData) {
 
 }
 
-
-
+//make buttons from past searches
 function renderPast() {
     var savedCard = document.getElementById("past-searches");
     for (let i = 0; i < window.localStorage.length; i++) {
         var keys = JSON.parse(localStorage.getItem(localStorage.key(i)));
 
         var savedBtn = document.createElement("button");
-        savedBtn.classList.add("btn", "saved-btn", "btn-outline-primary", "col");
+        savedBtn.classList.add("btn", "saved-btn", "btn-outline-primary", "bg-light", "col");
         savedBtn.textContent = keys;
         savedCard.append(savedBtn);
     }
