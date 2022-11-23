@@ -11,7 +11,7 @@ fetchButton.addEventListener("click", function(event) {
 
 
 function getApi(city) {
-    var getLatLong = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=e893f77c4ef5c1780913960b49428199";
+    var getLatLong = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=e893f77c4ef5c1780913960b49428199";
     console.log(getLatLong);
 ;
     fetch(getLatLong)
@@ -58,7 +58,7 @@ function oneDayDisplay(cityData, cityName) {
     cardBody.classList.add("card-body");
     cardName.textContent = cityName;
     cardBody.innerHTML = `temp: ${cityData.main.temp} humidity: ${cityData.main.humidity} wind speed: ${cityData.wind.speed}`;
-    iconImg.setAttribute("src", `http://openweathermap.org/img/wn/${cityData.weather[0].icon}.png`);
+    iconImg.setAttribute("src", `https://openweathermap.org/img/wn/${cityData.weather[0].icon}.png`);
     card.append(cardName);
     card.append(iconImg);
     card.append(cardBody);
@@ -84,7 +84,7 @@ function fiveDayDisplay(weatherData) {
             cardName.textContent = element.dt_txt;
             cardBody.innerHTML = `temp: ${element.main.temp} humidity: ${element.main.humidity} wind speed: ${element.wind.speed}`;
             let cardImg = document.createElement("img");
-            cardImg.setAttribute("src", `http://openweathermap.org/img/wn/${element.weather[0].icon}.png`);
+            cardImg.setAttribute("src", `https://openweathermap.org/img/wn/${element.weather[0].icon}.png`);
             card.append(cardName);
             card.append(cardImg);
             card.append(cardBody);
@@ -122,11 +122,3 @@ fetchSaved.on("click", function(event) {
     getApi(savedCity);
 });
 
-
-
-// WHEN I view current weather conditions for that city
-// THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, and the wind speed
-// WHEN I view future weather conditions for that city
-// THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
-// WHEN I click on a city in the search history
-// THEN I am again presented with current and future conditions for that city
